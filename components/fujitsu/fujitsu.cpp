@@ -88,7 +88,7 @@ namespace esphome
         {
             if (this->mode == climate::CLIMATE_MODE_OFF)
             {
-                this->ac_.setCmd(kFujitsuAcCmdTurnOff);
+                this->ac_.off();
             }
             else
             {
@@ -151,7 +151,7 @@ namespace esphome
                     break;
                 }
 
-                this->ac_.setCmd(kFujitsuAcCmdTurnOn);
+                this->ac_.on();
             }
 
             ESP_LOGI(TAG, this->ac_.toString().c_str());

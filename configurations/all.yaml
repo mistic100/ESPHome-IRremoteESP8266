@@ -26,6 +26,10 @@ climate:
     model: ARREB1E
     name: 'Fujitsu'
 
+  - platform: goodweather
+    id: my_goodweather
+    name: 'Goodweather'
+
   - platform: panasonic
     id: my_panasonic
     model: DKE

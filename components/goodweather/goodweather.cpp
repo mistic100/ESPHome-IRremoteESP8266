@@ -129,7 +129,8 @@ namespace esphome
                 this->ac_.on();
             }
 
-            ESP_LOGI(TAG, this->ac_.toString().c_str());
+            // FIXME does not compile on some frameworks ?
+            // ESP_LOGI(TAG, this->ac_.toString().c_str());
         }
 
     } // namespace goodweather_general

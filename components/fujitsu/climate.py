@@ -1,14 +1,12 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import climate_ir
-from esphome.const import CONF_ID, CONF_MODEL
+from esphome.const import CONF_MODEL
 
 AUTO_LOAD = ["climate_ir"]
 
 fujitsu_ns = cg.esphome_ns.namespace("fujitsu")
-FujitsuClimate = fujitsu_ns.class_(
-    "FujitsuClimate", climate_ir.ClimateIR
-)
+FujitsuClimate = fujitsu_ns.class_("FujitsuClimate", climate_ir.ClimateIR)
 
 Model = fujitsu_ns.enum("Model")
 MODELS = {
@@ -20,9 +18,8 @@ MODELS = {
     "ARREW4E": Model.ARREW4E,
 }
 
-CONFIG_SCHEMA = climate_ir.CLIMATE_IR_WITH_RECEIVER_SCHEMA.extend(
+CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(FujitsuClimate).extend(
     {
-        cv.GenerateID(): cv.declare_id(FujitsuClimate),
         cv.Required(CONF_MODEL): cv.enum(MODELS),
     }
 )
@@ -31,6 +28,5 @@ CONFIG_SCHEMA = climate_ir.CLIMATE_IR_WITH_RECEIVER_SCHEMA.extend(
 async def to_code(config):
     cg.add_library("IRremoteESP8266", None)
 
-    var = cg.new_Pvariable(config[CONF_ID])
-    await climate_ir.register_climate_ir(var, config)
+    await climate_ir.new_climate_ir(config)
     cg.add(var.set_model(config[CONF_MODEL]))

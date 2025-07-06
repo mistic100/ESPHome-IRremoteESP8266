@@ -90,8 +90,8 @@ namespace esphome
 
                 switch (this->mode)
                 {
-                case climate::CLIMATE_MODE_HEAT_COOL:
-                    this->ac_.setMode(kElectraAcAuto);
+                case climate::CLIMATE_MODE_AUTO:
+                    this->ac_.setMode(kElectraAcFanAuto);
                     break;
                 case climate::CLIMATE_MODE_HEAT:
                     this->ac_.setMode(kElectraAcHeat);

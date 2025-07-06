@@ -41,7 +41,7 @@ namespace esphome
         void ElectraClimate::send()
         {
             uint8_t *message = this->ac_.getRaw();
-            uint8_t length = this->ac_.getStateLength();
+            const uint16_t kElectraAcStateLength = 13;
 
             auto transmit = this->transmitter_->transmit();
             auto *data = transmit.get_data();
@@ -53,7 +53,7 @@ namespace esphome
             data->space(kElectraAcHdrSpace);
 
             // Data
-            for (uint8_t i = 0; i < length; i++)
+            for (uint8_t i = 0; i < kElectraAcStateLength; i++)
             {
                 uint8_t d = *(message + i);
                 for (uint8_t bit = 0; bit < 8; bit++, d >>= 1)
@@ -73,7 +73,7 @@ namespace esphome
 
             // Footer
             data->mark(kElectraAcBitMark);
-            data->space(kElectraAcMinGap);
+            data->space(kElectraAcMessageGap);
 
             transmit.perform();
         }

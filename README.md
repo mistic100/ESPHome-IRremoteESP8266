@@ -2,7 +2,7 @@
 
 This is a collection for `climate` implementations using the awesome [IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266) library.
 
-For now only the "Fujitsu" and "Electra (aux)" protocol is implemented, please open an issue or an PR to add more.
+For now only the "Fujitsu" and "Electra (aux)" protocols are implemented, please open an issue or an PR to add more.
 
 It does NOT support receive mode.
 

@@ -82,7 +82,7 @@ namespace esphome
         {
             if (this->mode == climate::CLIMATE_MODE_OFF)
             {
-                this->ac_.setPower(off);
+                this->ac_.setPower(false);
             }
             else
             {
@@ -146,7 +146,7 @@ namespace esphome
                     break;
                 }
 
-                this->ac_.setPower(on);
+                this->ac_.setPower(true);
             }
 
             ESP_LOGI(TAG, this->ac_.toString().c_str());

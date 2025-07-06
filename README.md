@@ -2,7 +2,7 @@
 
 This is a collection for `climate` implementations using the awesome [IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266) library.
 
-For now only the "Fujitsu" protocol is implemented, please open an issue or an PR to add more.
+For now only the "Fujitsu" and "Electra (aux)" protocol is implemented, please open an issue or an PR to add more.
 
 It does NOT support receive mode.
 
@@ -44,6 +44,25 @@ climate:
 - ARREW4E
 - ARRY4
 
+### Electra
+
+```yaml
+external_components:
+  - source:
+      type: git
+      url: https://github.com/mistic100/ESPHome-IRremoteESP8266
+    components: [ electra ]
+
+remote_transmitter:
+  pin: GPIOXX
+  carrier_duty_percent: 50%
+
+climate:
+  - platform: electra
+    name: 'Living Room AC'
+```
+
+
 It supports other options of [climate_ir](https://esphome.io/components/climate/climate_ir.html) like `sensor` and `transmitter_id`.
 
 ### Control fan direction
@@ -62,5 +81,6 @@ button:
 
 ## Changelog
 
+- **2025.07.06**: Add Electra platform
 - **2025.06.04**: Add `step_vertical()` and `step_horizontal()` methods to Fujitsu platform
 - **2025.05.22**: Compatibility with ESPHome 2025.5

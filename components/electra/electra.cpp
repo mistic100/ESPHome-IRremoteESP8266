@@ -149,7 +149,7 @@ namespace esphome
                 this->ac_.setPower(true);
             }
 
-            ESP_LOGI(TAG, this->ac_.toString());
+            // ESP_LOGI(TAG, this->ac_.toString().c_str());
         }
     } // namespace electra
 } // namespace esphome

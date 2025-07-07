@@ -13,7 +13,7 @@ namespace esphome
     namespace electra
     {
 
-        class ElectraClimate : public climate_ir::ClimateIR
+        class ElectraClimate : public climate_ir::ClimateIR, public ir_remote_base::IrRemoteBase
         {
         public:
             ElectraClimate()

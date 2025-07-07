@@ -113,6 +113,7 @@ remote_transmitter:
 climate:
   - platform: electra
     name: 'Living Room AC'
+```
 
 ## Changelog
 

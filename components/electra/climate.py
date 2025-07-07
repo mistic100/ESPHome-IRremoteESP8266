@@ -1,7 +1,7 @@
 import esphome.codegen as cg
 from esphome.components import climate_ir
 
-AUTO_LOAD = ["climate_ir"]
+AUTO_LOAD = ["climate_ir", "ir_remote_base"]
 
 electra_ns = cg.esphome_ns.namespace("electra")
 ElectraClimate = electra_ns.class_("ElectraClimate", climate_ir.ClimateIR)

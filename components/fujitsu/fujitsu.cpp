@@ -74,46 +74,22 @@ namespace esphome
             uint8_t *message = this->ac_.getRaw();
             uint8_t length = this->ac_.getStateLength();
 
-            auto transmit = this->transmitter_->transmit();
-            auto *data = transmit.get_data();
-
-            data->set_carrier_frequency(38000);
-
-            // Header
-            data->mark(kFujitsuAcHdrMark);
-            data->space(kFujitsuAcHdrSpace);
-
-            // Data
-            for (uint8_t i = 0; i < length; i++)
-            {
-                uint8_t d = *(message + i);
-                for (uint8_t bit = 0; bit < 8; bit++, d >>= 1)
-                {
-                    if (d & 1)
-                    {
-                        data->mark(kFujitsuAcBitMark);
-                        data->space(kFujitsuAcOneSpace);
-                    }
-                    else
-                    {
-                        data->mark(kFujitsuAcBitMark);
-                        data->space(kFujitsuAcZeroSpace);
-                    }
-                }
-            }
-
-            // Footer
-            data->mark(kFujitsuAcBitMark);
-            data->space(kFujitsuAcMinGap);
-
-            transmit.perform();
+            sendGeneric(
+                this->transmitter_,
+                kFujitsuAcHdrMark, kFujitsuAcHdrSpace,
+                kFujitsuAcBitMark, kFujitsuAcOneSpace,
+                kFujitsuAcBitMark, kFujitsuAcZeroSpace,
+                kFujitsuAcBitMark, kFujitsuAcMinGap,
+                message, length,
+                38000
+            );
         }
 
         void FujitsuClimate::apply_state()
         {
             if (this->mode == climate::CLIMATE_MODE_OFF)
             {
-                this->ac_.setCmd(kFujitsuAcCmdTurnOff);
+                this->ac_.off();
             }
             else
             {
@@ -176,7 +152,7 @@ namespace esphome
                     break;
                 }
 
-                this->ac_.setCmd(kFujitsuAcCmdTurnOn);
+                this->ac_.on();
             }
 
             ESP_LOGI(TAG, this->ac_.toString().c_str());

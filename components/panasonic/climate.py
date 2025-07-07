@@ -5,20 +5,20 @@ from esphome.const import CONF_MODEL
 
 AUTO_LOAD = ["climate_ir", "ir_remote_base"]
 
-fujitsu_ns = cg.esphome_ns.namespace("fujitsu")
-FujitsuClimate = fujitsu_ns.class_("FujitsuClimate", climate_ir.ClimateIR)
+panasonic_ns = cg.esphome_ns.namespace("panasonic")
+PanasonicClimate = panasonic_ns.class_("PanasonicClimate", climate_ir.ClimateIR)
 
-Model = fujitsu_ns.enum("Model")
+Model = panasonic_ns.enum("Model")
 MODELS = {
-    "ARRAH2E": Model.ARRAH2E,
-    "ARDB1": Model.ARDB1,
-    "ARREB1E": Model.ARREB1E,
-    "ARJW2": Model.ARJW2,
-    "ARRY4": Model.ARRY4,
-    "ARREW4E": Model.ARREW4E,
+    "LKE": Model.LKE,
+    "NKE": Model.NKE,
+    "DKE": Model.DKE,
+    "JKE": Model.JKE,
+    "CKP": Model.CKP,
+    "RKR": Model.RKR,
 }
 
-CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(FujitsuClimate).extend(
+CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(PanasonicClimate).extend(
     {
         cv.Required(CONF_MODEL): cv.enum(MODELS),
     }

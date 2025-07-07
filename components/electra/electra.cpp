@@ -26,12 +26,6 @@ namespace esphome
             this->apply_state();
         }
 
-        climate::ClimateTraits ElectraClimate::traits()
-        {
-            auto traits = climate_ir::ClimateIR::traits();
-            return traits;
-        }
-
         void ElectraClimate::transmit_state()
         {
             this->apply_state();
@@ -82,7 +76,7 @@ namespace esphome
         {
             if (this->mode == climate::CLIMATE_MODE_OFF)
             {
-                this->ac_.setPower(false);
+                this->ac_.off();
             }
             else
             {
@@ -141,15 +135,15 @@ namespace esphome
                     this->ac_.setSwingV(false);
                     break;
                 case climate::CLIMATE_SWING_BOTH:
-                    this->ac_.setSwingH(false);
-                    this->ac_.setSwingV(false);
+                    this->ac_.setSwingH(true);
+                    this->ac_.setSwingV(true);
                     break;
                 }
 
-                this->ac_.setPower(true);
+                this->ac_.on();
             }
 
-            // ESP_LOGI(TAG, this->ac_.toString().c_str());
+            ESP_LOGI(TAG, "State: %s", LOG_STR_ARG(this->ac_.toString().c_str()));
         }
     } // namespace electra
 } // namespace esphome

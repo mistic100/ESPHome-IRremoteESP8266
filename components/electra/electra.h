@@ -20,7 +20,6 @@ namespace esphome
                             {climate::CLIMATE_SWING_OFF, climate::CLIMATE_SWING_VERTICAL, climate::CLIMATE_SWING_HORIZONTAL, climate::CLIMATE_SWING_BOTH}) {}
 
             void setup() override;
-            climate::ClimateTraits traits() override;
 
         protected:
             void transmit_state() override;

@@ -10,3 +10,4 @@ CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(ElectraClimate)
 
 async def to_code(config):
     cg.add_library("IRremoteESP8266", None)
+    var = await climate_ir.new_climate_ir(config)

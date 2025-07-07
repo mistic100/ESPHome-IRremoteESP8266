@@ -35,41 +35,17 @@ namespace esphome
         void ElectraClimate::send()
         {
             uint8_t *message = this->ac_.getRaw();
-            const uint16_t kElectraAcStateLength = 13;
+            const uint16_t length = 13; // from kElectraAcStateLength
 
-            auto transmit = this->transmitter_->transmit();
-            auto *data = transmit.get_data();
-
-            data->set_carrier_frequency(38000);
-
-            // Header
-            data->mark(kElectraAcHdrMark);
-            data->space(kElectraAcHdrSpace);
-
-            // Data
-            for (uint8_t i = 0; i < kElectraAcStateLength; i++)
-            {
-                uint8_t d = *(message + i);
-                for (uint8_t bit = 0; bit < 8; bit++, d >>= 1)
-                {
-                    if (d & 1)
-                    {
-                        data->mark(kElectraAcBitMark);
-                        data->space(kElectraAcOneSpace);
-                    }
-                    else
-                    {
-                        data->mark(kElectraAcBitMark);
-                        data->space(kElectraAcZeroSpace);
-                    }
-                }
-            }
-
-            // Footer
-            data->mark(kElectraAcBitMark);
-            data->space(kElectraAcMessageGap);
-
-            transmit.perform();
+            sendGeneric(
+                this->transmitter_,
+                kElectraAcHdrMark, kElectraAcHdrSpace,
+                kElectraAcBitMark, kElectraAcOneSpace,
+                kElectraAcBitMark, kElectraAcZeroSpace,
+                kElectraAcBitMark, kElectraAcMessageGap,
+                message, length,
+                38000
+            );
         }
 
         void ElectraClimate::apply_state()

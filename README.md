@@ -9,7 +9,7 @@ It does NOT support receive mode.
 **Supported platforms:**
 - [Fujitsu](#fujitsu)
 - [Panasonic](#panasonic)
-
+- [Electra](#Electra)
 
 ## Usage
 
@@ -95,9 +95,28 @@ climate:
 - CKP
 - RKR
 
+### Electra
+
+Also known as Aux
+
+```yaml
+external_components:
+  - source:
+      type: git
+      url: https://github.com/mistic100/ESPHome-IRremoteESP8266
+    components: [ electra, ir_remote_base ]
+
+remote_transmitter:
+  pin: GPIOXX
+  carrier_duty_percent: 50%
+
+climate:
+  - platform: electra
+    name: 'Living Room AC'
 
 ## Changelog
 
+- **2025.07.07**: Add Electra platform
 - **2025.07.06**: Add Panasonic platform
 - **2025.06.04**: Add `step_vertical()` and `step_horizontal()` methods to Fujitsu platform
 - **2025.05.22**: Compatibility with ESPHome 2025.5

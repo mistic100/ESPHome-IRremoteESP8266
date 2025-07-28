@@ -8,6 +8,7 @@ It does NOT support receive mode.
 
 **Supported platforms:**
 - [fujitsu](#fujitsu)
+- [fujitsu-264](#fujitsu-264)
 - [panasonic](#panasonic)
 - [electra](#electra)
 
@@ -71,6 +72,43 @@ button:
             id(my_climate).step_vertical();
 ```
 
+### fujitsu-264
+
+```yaml
+climate:
+  - platform: fujitsu_264
+    name: 'Living Room AC'
+```
+
+#### Toggle powerful
+
+You can call the `toggle_powerful()` methods on the climate controller.
+
+```yaml
+button:
+  - platform: template
+    name: 'Toggle powerful'
+    on_press:
+      then:
+        - lambda: |-
+            id(my_climate).toggle_powerful();
+```
+
+#### Set fan angle
+
+You can call the `set_fan_angle()` method on the climate controller.
+
+```yaml
+button:
+  - platform: template
+    name: 'Set fan angle'
+    on_press:
+      then:
+        - lambda: |-
+            // Acceptable values are 1-7 and 15(means stay)
+            id(my_climate).set_fan_angle(1);
+```
+
 ### panasonic
 
 ```yaml
@@ -101,6 +139,7 @@ climate:
 
 ## Changelog
 
+- **2025.07.28**: Add fujitsu-264 platform
 - **2025.07.21**: Compatibility with ESPHome 2025.7
 - **2025.07.07**: Add Electra platform
 - **2025.07.06**: Add Panasonic platform

@@ -74,6 +74,8 @@ button:
 
 ### fujitsu-264
 
+This platform implements the special Fujitsu protocol of the `AR-RLB2J` remote.
+
 ```yaml
 climate:
   - platform: fujitsu_264

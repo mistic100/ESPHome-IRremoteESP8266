@@ -31,6 +31,11 @@ climate:
     model: DKE
     name: 'Panasonic'
 
+  - platform: sharp
+    id: my_sharp
+    model: A705
+    name: 'Sharp'
+
 button:
   - platform: template
     name: 'Step vertical'

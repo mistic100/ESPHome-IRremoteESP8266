@@ -11,6 +11,7 @@ It does NOT support receive mode.
 - [fujitsu-264](#fujitsu-264)
 - [panasonic](#panasonic)
 - [electra](#electra)
+- [sharp](#sharp)
 
 ## Usage
 
@@ -125,8 +126,19 @@ climate:
     name: 'Living Room AC'
 ```
 
+## sharp
+
+```yaml
+climate:
+  - platform: sharp
+    model: XXXXXX
+    name: 'Living Room AC'
+```
+
+
 ## Changelog
 
+- **2026.02.21**: Add Sharp platform
 - **2026.02.19**: Use latest version of IRremoteESP8266
 - **2025.07.28**: Add fujitsu-264 platform
 - **2025.07.21**: Compatibility with ESPHome 2025.7

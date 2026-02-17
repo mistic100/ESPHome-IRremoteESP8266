@@ -1,0 +1,31 @@
+esphome:
+  name: ac-fujitsu
+
+external_components:
+  - source:
+      type: local
+      path: ../components
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+remote_transmitter:
+  id: ir_led
+  pin: 4
+  carrier_duty_percent: 50%
+
+climate:
+  - platform: fujitsu
+    id: my_climate
+    model: ARREB1E
+    name: 'AC'
+
+button:
+  - platform: template
+    name: 'Step vertical'
+    on_press:
+      then:
+        - lambda: |-
+            id(my_climate).step_vertical();

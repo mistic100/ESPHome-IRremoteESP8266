@@ -1,0 +1,22 @@
+esphome:
+  name: ac-electra
+
+external_components:
+  - source:
+      type: local
+      path: ../components
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+remote_transmitter:
+  id: ir_led
+  pin: 4
+  carrier_duty_percent: 50%
+
+climate:
+  - platform: electra
+    id: my_climate
+    name: 'AC'

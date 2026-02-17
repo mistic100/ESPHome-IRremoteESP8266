@@ -1,0 +1,37 @@
+esphome:
+  name: ac-fujitsu-264
+
+external_components:
+  - source:
+      type: local
+      path: ../components
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+remote_transmitter:
+  id: ir_led
+  pin: 4
+  carrier_duty_percent: 50%
+
+climate:
+  - platform: fujitsu_264
+    id: my_climate
+    name: 'AC'
+
+button:
+  - platform: template
+    name: 'Toggle powerful'
+    on_press:
+      then:
+        - lambda: |-
+            id(my_climate).toggle_powerful();
+
+  - platform: template
+    name: 'Set fan angle'
+    on_press:
+      then:
+        - lambda: |-
+            id(my_climate).set_fan_angle(1);

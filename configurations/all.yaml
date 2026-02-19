@@ -1,5 +1,5 @@
 esphome:
-  name: ac-fujitsu
+  name: test-all
 
 external_components:
   - source:
@@ -17,10 +17,19 @@ remote_transmitter:
   carrier_duty_percent: 50%
 
 climate:
+  - platform: electra
+    id: my_electra
+    name: 'Electra'
+
   - platform: fujitsu
-    id: my_climate
+    id: my_fujitsu
     model: ARREB1E
-    name: 'AC'
+    name: 'Fujitsu'
+
+  - platform: panasonic
+    id: my_panasonic
+    model: DKE
+    name: 'Panasonic'
 
 button:
   - platform: template
@@ -28,4 +37,4 @@ button:
     on_press:
       then:
         - lambda: |-
-            id(my_climate).step_vertical();
+            id(my_fujitsu).step_vertical();

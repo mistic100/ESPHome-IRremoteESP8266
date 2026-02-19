@@ -1,5 +1,7 @@
+# separate test file because it uses a different version of IRremoteESP8266
+
 esphome:
-  name: ac-fujitsu-264
+  name: test-fujitsu-264
 
 external_components:
   - source:
@@ -18,8 +20,8 @@ remote_transmitter:
 
 climate:
   - platform: fujitsu_264
-    id: my_climate
-    name: 'AC'
+    id: my_fujitsu_264
+    name: 'Fujitsu-264'
 
 button:
   - platform: template
@@ -27,11 +29,11 @@ button:
     on_press:
       then:
         - lambda: |-
-            id(my_climate).toggle_powerful();
+            id(my_fujitsu_264).toggle_powerful();
 
   - platform: template
     name: 'Set fan angle'
     on_press:
       then:
         - lambda: |-
-            id(my_climate).set_fan_angle(1);
+            id(my_fujitsu_264).set_fan_angle(1);

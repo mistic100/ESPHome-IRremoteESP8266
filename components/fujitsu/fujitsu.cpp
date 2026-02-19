@@ -1,9 +1,3 @@
-#define _IR_ENABLE_DEFAULT_ false
-#define SEND_FUJITSU_AC true
-#define DECODE_FUJITSU_AC false
-
-#include "esphome.h"
-#include "ir_Fujitsu.h"
 #include "fujitsu.h"
 
 namespace esphome

@@ -19,5 +19,6 @@ async def to_code(config):
         repository="https://github.com/hldh214/IRremoteESP8266.git#564c20fa2e345420598bd0286d7070036551928b",
         version="564c20fa2e345420598bd0286d7070036551928b",
     )
+    cg.add_define("_IR_ENABLE_DEFAULT_", False)
 
     await climate_ir.new_climate_ir(config)

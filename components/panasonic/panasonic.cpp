@@ -1,9 +1,3 @@
-#define _IR_ENABLE_DEFAULT_ false
-#define SEND_PANASONIC_AC true
-#define DECODE_PANASONIC_AC false
-
-#include "esphome.h"
-#include "ir_Panasonic.h"
 #include "panasonic.h"
 
 namespace esphome

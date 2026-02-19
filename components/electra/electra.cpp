@@ -1,9 +1,3 @@
-#define _IR_ENABLE_DEFAULT_ false
-#define SEND_ELECTRA_AC true
-#define DECODE_ELECTRA_AC false
-
-#include "esphome.h"
-#include "ir_Electra.h"
 #include "electra.h"
 
 namespace esphome

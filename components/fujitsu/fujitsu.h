@@ -4,9 +4,8 @@
 #include "esphome/core/component.h"
 #include "esphome/core/automation.h"
 #include "esphome/components/climate_ir/climate_ir.h"
-
-#include "ir_Fujitsu.h"
 #include "esphome/components/ir_remote_base/ir_remote_base.h"
+#include "ir_Fujitsu.h"
 
 namespace esphome
 {
@@ -25,7 +24,7 @@ namespace esphome
         {
         public:
             FujitsuClimate()
-                : ClimateIR(16, 30, 1.0f, true, true,
+                : ClimateIR(kFujitsuAcMinTemp, kFujitsuAcMaxTemp, 1.0f, true, true,
                             {climate::CLIMATE_FAN_AUTO, climate::CLIMATE_FAN_LOW, climate::CLIMATE_FAN_MEDIUM, climate::CLIMATE_FAN_HIGH, climate::CLIMATE_FAN_QUIET},
                             {climate::CLIMATE_SWING_OFF, climate::CLIMATE_SWING_VERTICAL}) {}
 

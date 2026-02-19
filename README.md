@@ -14,8 +14,6 @@ It does NOT support receive mode.
 
 ## Usage
 
-_Note:_ Only Arduino Framework is supported
-
 ```yaml
 esp32:
   framework:
@@ -40,23 +38,20 @@ Replace `<platform_name>` by the name of one of the platforms available.
 
 It supports other options of [climate_ir](https://esphome.io/components/climate/climate_ir.html) like `sensor` and `transmitter_id`.
 
+> [!NOTE]
+> For platforms with a `model` option, please refer to the [supported Protocols page](https://github.com/crankyoldgit/IRremoteESP8266/blob/master/SupportedProtocols.md) ("A/C Model" column).
+
+> [!WARNING]
+> Only Arduino Framework is supported
+
 ## fujitsu
 
 ```yaml
 climate:
   - platform: fujitsu
-    model: ARREB1E
+    model: XXXXXX
     name: 'Living Room AC'
 ```
-
-`model` is one of the remote model name supported by IRremoteESP8266:
-
-- ARDB1
-- ARJW2
-- ARRAH2E
-- ARREB1E
-- ARREW4E
-- ARRY4
 
 #### Control fan direction
 
@@ -116,18 +111,9 @@ button:
 ```yaml
 climate:
   - platform: panasonic
-    model: DKE
+    model: XXXXXX
     name: 'Living Room AC'
 ```
-
-`model` is one of the remote model name supported by IRremoteESP8266:
-
-- LKE
-- NKE
-- DKE
-- JKE
-- CKP
-- RKR
 
 ## electra
 
@@ -141,6 +127,7 @@ climate:
 
 ## Changelog
 
+- **2026.02.19**: Use latest version of IRremoteESP8266
 - **2025.07.28**: Add fujitsu-264 platform
 - **2025.07.21**: Compatibility with ESPHome 2025.7
 - **2025.07.07**: Add Electra platform

@@ -4,9 +4,8 @@
 #include "esphome/core/component.h"
 #include "esphome/core/automation.h"
 #include "esphome/components/climate_ir/climate_ir.h"
-
-#include "ir_Fujitsu.h"
 #include "esphome/components/ir_remote_base/ir_remote_base.h"
+#include "ir_Fujitsu.h"
 
 namespace esphome
 {

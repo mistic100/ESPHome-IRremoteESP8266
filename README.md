@@ -7,10 +7,11 @@ For now only some protocols are implemented, please open an issue or an PR to ad
 It does NOT support receive mode.
 
 **Supported platforms:**
+- [electra](#electra)
 - [fujitsu](#fujitsu)
 - [fujitsu-264](#fujitsu-264)
 - [panasonic](#panasonic)
-- [electra](#electra)
+- [samsung](#samsung)
 - [sharp](#sharp)
 
 ## Usage
@@ -44,6 +45,16 @@ It supports other options of [climate_ir](https://esphome.io/components/climate/
 
 > [!WARNING]
 > Only Arduino Framework is supported
+
+## electra
+
+Also known as Aux.
+
+```yaml
+climate:
+  - platform: electra
+    name: 'Living Room AC'
+```
 
 ## fujitsu
 
@@ -116,13 +127,11 @@ climate:
     name: 'Living Room AC'
 ```
 
-## electra
-
-Also known as Aux.
+## samsung
 
 ```yaml
 climate:
-  - platform: electra
+  - platform: samsung
     name: 'Living Room AC'
 ```
 
@@ -138,6 +147,7 @@ climate:
 
 ## Changelog
 
+- **2026.03.XX**: Add Samsung platform
 - **2026.02.21**: Add Sharp platform
 - **2026.02.19**: Use latest version of IRremoteESP8266
 - **2025.07.28**: Add fujitsu-264 platform

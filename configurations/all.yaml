@@ -36,6 +36,10 @@ climate:
     model: A705
     name: 'Sharp'
 
+  - platform: samsung
+    id: my_samsung
+    name: 'Samsung'
+
 button:
   - platform: template
     name: 'Step vertical'

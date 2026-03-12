@@ -46,7 +46,6 @@ namespace esphome
             uint8_t length = this->ac_.getStateLength();
 
             sendGeneric(
-                this->transmitter_,
                 kFujitsuAcHdrMark, kFujitsuAcHdrSpace,
                 kFujitsuAcBitMark, kFujitsuAcOneSpace,
                 kFujitsuAcBitMark, kFujitsuAcZeroSpace,

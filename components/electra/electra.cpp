@@ -31,7 +31,6 @@ namespace esphome
             uint8_t *message = this->ac_.getRaw();
 
             sendGeneric(
-                this->transmitter_,
                 kElectraAcHdrMark, kElectraAcHdrSpace,
                 kElectraAcBitMark, kElectraAcOneSpace,
                 kElectraAcBitMark, kElectraAcZeroSpace,

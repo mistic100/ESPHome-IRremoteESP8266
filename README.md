@@ -12,6 +12,7 @@ It does NOT support receive mode.
 - [panasonic](#panasonic)
 - [electra](#electra)
 - [sharp](#sharp)
+- [mitsubishi](#mitsubishi)
 
 ## Usage
 
@@ -135,9 +136,28 @@ climate:
     name: 'Living Room AC'
 ```
 
+## mitsubishi
+
+Supports Mitsubishi Electric air conditioners.
+
+```yaml
+climate:
+  - platform: mitsubishi
+    model: XXXXXX
+    name: 'Living Room AC'
+```
+
+#### Available models
+
+| Model | Protocol | Temperature | Compatible Units |
+|-------|----------|-------------|------------------|
+| `GENERAL` | 144-bit | 16-31°C | MSZ-GV2519, MSZ-SF25VE, MSZ-FHnnVE, MLZ-RX5017AS |
+| `MSY` | 136-bit | 17-30°C | PEAD-RP71JAA (ducted systems) |
+| `MSH` | 112-bit | 16-31°C | MSH-A24WV, MUH-A24WV |
 
 ## Changelog
 
+- **2026.03.12**: Add Mitsubishi platform
 - **2026.02.21**: Add Sharp platform
 - **2026.02.19**: Use latest version of IRremoteESP8266
 - **2025.07.28**: Add fujitsu-264 platform

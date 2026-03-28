@@ -36,6 +36,21 @@ climate:
     model: A705
     name: 'Sharp'
 
+  - platform: mitsubishi
+    id: my_mitsubishi_ac
+    model: MITSUBISHI_AC
+    name: 'Mitsubishi AC'
+
+  - platform: mitsubishi
+    id: my_mitsubishi_136
+    model: MITSUBISHI136
+    name: 'Mitsubishi 136'
+
+  - platform: mitsubishi
+    id: my_mitsubishi_112
+    model: MITSUBISHI112
+    name: 'Mitsubishi 112'
+
 button:
   - platform: template
     name: 'Step vertical'

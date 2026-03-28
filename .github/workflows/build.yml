@@ -2,9 +2,10 @@ name: ESPHome Build Validation
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:

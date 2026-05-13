@@ -33,6 +33,15 @@ namespace esphome
                 traits.add_supported_swing_mode(climate::CLIMATE_SWING_HORIZONTAL);
                 traits.add_supported_swing_mode(climate::CLIMATE_SWING_BOTH);
             }
+            // Expose Eco and Powerful (boost) modes as HA presets. The Fujitsu IR
+            // protocol implements both as toggle commands (no state bit), so we
+            // track our assumed state internally and emit the toggle when the
+            // user changes preset. See control() and econo() / powerful() below.
+            traits.set_supported_presets({
+                climate::CLIMATE_PRESET_NONE,
+                climate::CLIMATE_PRESET_ECO,
+                climate::CLIMATE_PRESET_BOOST,
+            });
             return traits;
         }
 
@@ -40,6 +49,27 @@ namespace esphome
         {
             this->apply_state();
             this->send();
+        }
+
+        void FujitsuClimate::control(const climate::ClimateCall &call)
+        {
+            // Intercept preset changes BEFORE delegating to the parent so that
+            // we send the toggle command(s) for Eco / Powerful as needed.
+            // Parent's control() will then transmit the regular state frame
+            // for any other change (mode, temp, fan, swing).
+            if (call.get_preset().has_value())
+            {
+                auto desired_preset = *call.get_preset();
+                bool desired_econo = (desired_preset == climate::CLIMATE_PRESET_ECO);
+                bool desired_powerful = (desired_preset == climate::CLIMATE_PRESET_BOOST);
+
+                if (desired_econo != this->econo_state_)
+                    this->econo();
+                if (desired_powerful != this->powerful_state_)
+                    this->powerful();
+            }
+
+            climate_ir::ClimateIR::control(call);
         }
 
         void FujitsuClimate::step_horizontal()
@@ -61,6 +91,39 @@ namespace esphome
             this->ac_.stepVert();
             ESP_LOGI(TAG, "%s", this->ac_.toString().c_str());
             this->send();
+        }
+
+        void FujitsuClimate::econo()
+        {
+            this->ac_.setCmd(kFujitsuAcCmdEcono);
+            this->send();
+            this->econo_state_ = !this->econo_state_;
+            ESP_LOGI(TAG, "Toggling Eco (now %s)", this->econo_state_ ? "ON" : "OFF");
+            this->sync_preset_to_state();
+        }
+
+        void FujitsuClimate::powerful()
+        {
+            this->ac_.setCmd(kFujitsuAcCmdPowerful);
+            this->send();
+            this->powerful_state_ = !this->powerful_state_;
+            ESP_LOGI(TAG, "Toggling Powerful (now %s)", this->powerful_state_ ? "ON" : "OFF");
+            this->sync_preset_to_state();
+        }
+
+        // Reflect the internal Eco / Powerful tracking into HA's preset field.
+        // ECO and BOOST are mutually exclusive in HA's preset model, so when both
+        // are internally on we prefer ECO (last-toggled-wins is harder to track
+        // and not particularly useful — Eco wins as the more common everyday mode).
+        void FujitsuClimate::sync_preset_to_state()
+        {
+            if (this->econo_state_)
+                this->preset = climate::CLIMATE_PRESET_ECO;
+            else if (this->powerful_state_)
+                this->preset = climate::CLIMATE_PRESET_BOOST;
+            else
+                this->preset = climate::CLIMATE_PRESET_NONE;
+            this->publish_state();
         }
 
         void FujitsuClimate::send()

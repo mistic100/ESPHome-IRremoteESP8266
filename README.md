@@ -74,7 +74,7 @@ button:
 The Fujitsu IR protocol implements Eco and Powerful as toggle commands (no state bit), so the platform tracks the assumed state internally. They are exposed in two ways:
 
 1. As HA presets (`Eco` and `Boost`) — switch them via the climate card's preset selector.
-2. As lambda methods `econo()` / `powerful()` for advanced use:
+2. As lambda methods `toggle_econo()` / `toggle_powerful()` for advanced use:
 
 ```yaml
 button:
@@ -83,11 +83,11 @@ button:
     on_press:
       then:
         - lambda: |-
-            id(my_climate).econo();
+            id(my_climate).toggle_econo();
 ```
 
 > [!NOTE]
-> Because there is no state feedback over IR, toggling Eco or Powerful from the physical IR remote will desync the assumed state until the next ESPHome-initiated change. Both default to `off` on power-on, matching a fresh boot of the indoor unit.
+> Because there is no state feedback, toggling Eco or Powerful from the physical IR remote will desync the assumed state until the next ESPHome-initiated change. Both default to `off` on power-on, matching a fresh boot of the indoor unit.
 
 ## fujitsu-264
 
@@ -167,7 +167,7 @@ climate:
 
 ## Changelog
 
-- **Unreleased**: Add Eco and Powerful presets (and `econo()` / `powerful()` lambda methods) to Fujitsu platform
+- **2026.05.16**: Add Eco and Powerful presets to Fujitsu platform
 - **2026.03.28**: Add Mitsubishi platform
 - **2026.02.21**: Add Sharp platform
 - **2026.02.19**: Use latest version of IRremoteESP8266

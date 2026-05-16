@@ -53,8 +53,22 @@ climate:
 
 button:
   - platform: template
-    name: 'Step vertical'
+    name: 'Fujitsu Step vertical'
     on_press:
       then:
         - lambda: |-
             id(my_fujitsu).step_vertical();
+
+  - platform: template
+    name: 'Fujitsu Toggle econo'
+    on_press:
+      then:
+        - lambda: |-
+            id(my_fujitsu).toggle_econo();
+
+  - platform: template
+    name: 'Fujitsu Toggle powerful'
+    on_press:
+      then:
+        - lambda: |-
+            id(my_fujitsu).toggle_powerful();

@@ -28,20 +28,19 @@ namespace esphome
         climate::ClimateTraits FujitsuClimate::traits()
         {
             auto traits = climate_ir::ClimateIR::traits();
-            if (this->ac_.getModel() == fujitsu_ac_remote_model_t::ARRAH2E || this->ac_.getModel() == fujitsu_ac_remote_model_t::ARJW2)
+            if (this->supports_horizontal_swing())
             {
                 traits.add_supported_swing_mode(climate::CLIMATE_SWING_HORIZONTAL);
                 traits.add_supported_swing_mode(climate::CLIMATE_SWING_BOTH);
             }
-            // Expose Eco and Powerful (boost) modes as HA presets. The Fujitsu IR
-            // protocol implements both as toggle commands (no state bit), so we
-            // track our assumed state internally and emit the toggle when the
-            // user changes preset. See control() and econo() / powerful() below.
-            traits.set_supported_presets({
-                climate::CLIMATE_PRESET_NONE,
-                climate::CLIMATE_PRESET_ECO,
-                climate::CLIMATE_PRESET_BOOST,
-            });
+            if (this->supports_econo_powerful())
+            {
+                traits.set_supported_presets({
+                    climate::CLIMATE_PRESET_NONE,
+                    climate::CLIMATE_PRESET_ECO,
+                    climate::CLIMATE_PRESET_BOOST,
+                });
+            }
             return traits;
         }
 
@@ -64,9 +63,9 @@ namespace esphome
                 bool desired_powerful = (desired_preset == climate::CLIMATE_PRESET_BOOST);
 
                 if (desired_econo != this->econo_state_)
-                    this->econo();
+                    this->toggle_econo();
                 if (desired_powerful != this->powerful_state_)
-                    this->powerful();
+                    this->toggle_powerful();
             }
 
             climate_ir::ClimateIR::control(call);
@@ -74,7 +73,7 @@ namespace esphome
 
         void FujitsuClimate::step_horizontal()
         {
-            if (this->traits().supports_swing_mode(climate::CLIMATE_SWING_HORIZONTAL))
+            if (this->supports_horizontal_swing())
             {
                 this->ac_.stepHoriz();
                 ESP_LOGI(TAG, "%s", this->ac_.toString().c_str());
@@ -93,22 +92,38 @@ namespace esphome
             this->send();
         }
 
-        void FujitsuClimate::econo()
+        void FujitsuClimate::toggle_econo()
         {
-            this->ac_.setCmd(kFujitsuAcCmdEcono);
-            this->send();
-            this->econo_state_ = !this->econo_state_;
-            ESP_LOGI(TAG, "Toggling Eco (now %s)", this->econo_state_ ? "ON" : "OFF");
-            this->sync_preset_to_state();
+            if (this->supports_econo_powerful())
+            {
+                this->ac_.setCmd(kFujitsuAcCmdEcono);
+                this->send();
+                this->econo_state_ = !this->econo_state_;
+                this->powerful_state_ = false;
+                ESP_LOGI(TAG, "Toggling Eco (now %s)", this->econo_state_ ? "ON" : "OFF");
+                this->sync_preset_to_state();
+            }
+            else
+            {
+                ESP_LOGW(TAG, "Model does not support econo mode");
+            }
         }
 
-        void FujitsuClimate::powerful()
+        void FujitsuClimate::toggle_powerful()
         {
-            this->ac_.setCmd(kFujitsuAcCmdPowerful);
-            this->send();
-            this->powerful_state_ = !this->powerful_state_;
-            ESP_LOGI(TAG, "Toggling Powerful (now %s)", this->powerful_state_ ? "ON" : "OFF");
-            this->sync_preset_to_state();
+            if (this->supports_econo_powerful())
+            {
+                this->ac_.setCmd(kFujitsuAcCmdPowerful);
+                this->send();
+                this->powerful_state_ = !this->powerful_state_;
+                this->econo_state_ = false;
+                ESP_LOGI(TAG, "Toggling Powerful (now %s)", this->powerful_state_ ? "ON" : "OFF");
+                this->sync_preset_to_state();
+            }
+            else
+            {
+                ESP_LOGW(TAG, "Model does not support powerful mode");
+            }
         }
 
         // Reflect the internal Eco / Powerful tracking into HA's preset field.

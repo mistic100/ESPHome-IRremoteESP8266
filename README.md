@@ -55,6 +55,26 @@ climate:
     name: 'Living Room AC'
 ```
 
+#### Horizontal swing
+
+Whether horizontal swing is supported is normally derived from the `model`
+(it is enabled for `ARRAH2E` and `ARJW2`). Some indoor units share one of these
+remote protocols but physically lack motorized horizontal vanes — on those units
+sending a horizontal/both swing command is rejected by the unit. Use the optional
+`horizontal_swing` option to override the model-based default and hide the
+`HORIZONTAL` / `BOTH` swing modes:
+
+```yaml
+climate:
+  - platform: fujitsu
+    model: ARRAH2E
+    horizontal_swing: false
+    name: 'Living Room AC'
+```
+
+When omitted, the model-based behavior is preserved (no change for existing
+configurations).
+
 #### Control fan direction
 
 You can call the `step_vertical()` and `step_horizontal()` (if supported) methods on the climate controller.

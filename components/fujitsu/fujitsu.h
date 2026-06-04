@@ -3,6 +3,7 @@
 #include "esphome/core/log.h"
 #include "esphome/core/component.h"
 #include "esphome/core/automation.h"
+#include "esphome/core/optional.h"
 #include "esphome/components/ir_remote_base/ir_remote_base.h"
 #include "ir_Fujitsu.h"
 
@@ -29,6 +30,14 @@ namespace esphome
                                {climate::CLIMATE_SWING_OFF, climate::CLIMATE_SWING_VERTICAL}) {}
 
             void set_model(const Model model);
+
+            // Override the model-based detection of horizontal swing support.
+            // Some units share a remote protocol that defaults to horizontal
+            // swing (e.g. ARRAH2E) but physically lack motorized horizontal
+            // vanes; sending a horizontal/both swing command makes those units
+            // reject the frame. Set to false via the `horizontal_swing` YAML
+            // option to hide HORIZONTAL/BOTH from the exposed swing modes.
+            void set_horizontal_swing_supported(bool supported) { this->horizontal_swing_override_ = supported; }
 
             void setup() override;
             climate::ClimateTraits traits() override;
@@ -58,6 +67,8 @@ namespace esphome
 
             inline bool supports_horizontal_swing()
             {
+                if (this->horizontal_swing_override_.has_value())
+                    return this->horizontal_swing_override_.value();
                 return this->ac_.getModel() == fujitsu_ac_remote_model_t::ARRAH2E || this->ac_.getModel() == fujitsu_ac_remote_model_t::ARJW2;
             }
 
@@ -72,6 +83,10 @@ namespace esphome
             // Both default to false, matching a fresh power-on of the AC.
             bool econo_state_ = false;
             bool powerful_state_ = false;
+
+            // When set, overrides the model-based horizontal swing detection.
+            // Unset (default) preserves the previous model-driven behavior.
+            optional<bool> horizontal_swing_override_;
         };
 
     } // namespace fujitsu

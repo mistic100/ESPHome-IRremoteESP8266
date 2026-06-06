@@ -67,9 +67,6 @@ climate:
     name: 'Living Room AC'
 ```
 
-When omitted, the model-based behavior is preserved (no change for existing
-configurations).
-
 #### Control fan direction
 
 You can call the `step_vertical()` and `step_horizontal()` (if supported) methods on the climate controller.

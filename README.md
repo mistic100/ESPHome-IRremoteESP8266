@@ -57,12 +57,7 @@ climate:
 
 #### Horizontal swing
 
-Whether horizontal swing is supported is normally derived from the `model`
-(it is enabled for `ARRAH2E` and `ARJW2`). Some indoor units share one of these
-remote protocols but physically lack motorized horizontal vanes — on those units
-sending a horizontal/both swing command is rejected by the unit. Use the optional
-`horizontal_swing` option to override the model-based default and hide the
-`HORIZONTAL` / `BOTH` swing modes:
+Use this option to disable horizontal swing regardless of your remote (it is enabled for `ARRAH2E` and `ARJW2`). Set it to `false` if your unit uses one of these protocols but actually lack horizontal swing.
 
 ```yaml
 climate:

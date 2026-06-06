@@ -64,7 +64,9 @@ namespace esphome
             inline bool supports_horizontal_swing()
             {
                 if (this->horizontal_swing_override_.has_value())
+                {
                     return this->horizontal_swing_override_.value();
+                }
                 return this->ac_.getModel() == fujitsu_ac_remote_model_t::ARRAH2E || this->ac_.getModel() == fujitsu_ac_remote_model_t::ARJW2;
             }
 

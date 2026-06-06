@@ -194,4 +194,38 @@ climate:
 ## Contributors
 
 <!-- readme: contributors -start -->
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/mistic100">
+                    <img src="https://avatars.githubusercontent.com/u/41597?v=4" width="100;" alt="mistic100"/>
+                    <br />
+                    <sub><b>Damien Sorel</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/gnoto">
+                    <img src="https://avatars.githubusercontent.com/u/54668134?v=4" width="100;" alt="gnoto"/>
+                    <br />
+                    <sub><b>gnoto</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/hldh214">
+                    <img src="https://avatars.githubusercontent.com/u/5501843?v=4" width="100;" alt="hldh214"/>
+                    <br />
+                    <sub><b>Jim Ryu</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/diredocks">
+                    <img src="https://avatars.githubusercontent.com/u/26994007?v=4" width="100;" alt="diredocks"/>
+                    <br />
+                    <sub><b>dd</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
 <!-- readme: contributors -end -->

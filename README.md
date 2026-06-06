@@ -55,6 +55,18 @@ climate:
     name: 'Living Room AC'
 ```
 
+#### Horizontal swing
+
+Use this option to disable horizontal swing regardless of your remote (it is enabled for `ARRAH2E` and `ARJW2`). Set it to `false` if your unit uses one of these protocols but actually lacks horizontal swing.
+
+```yaml
+climate:
+  - platform: fujitsu
+    model: ARRAH2E
+    horizontal_swing: false
+    name: 'Living Room AC'
+```
+
 #### Control fan direction
 
 You can call the `step_vertical()` and `step_horizontal()` (if supported) methods on the climate controller.
@@ -167,6 +179,7 @@ climate:
 
 ## Changelog
 
+- **2026.06.06**: Add `horizontal_swing` to Fujitsu platform
 - **2026.05.16**: Add Eco and Powerful presets to Fujitsu platform
 - **2026.03.28**: Add Mitsubishi platform
 - **2026.02.21**: Add Sharp platform

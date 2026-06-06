@@ -190,3 +190,8 @@ climate:
 - **2025.07.06**: Add Panasonic platform
 - **2025.06.04**: Add `step_vertical()` and `step_horizontal()` methods to Fujitsu platform
 - **2025.05.22**: Compatibility with ESPHome 2025.5
+
+## Contributors
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->

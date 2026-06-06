@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - '*'
+    paths-ignore:
+      - 'README.md'
   pull_request:
   workflow_dispatch:
 
@@ -46,3 +48,18 @@ jobs:
             echo "--- Processing $config ---"
             esphome compile "$config"
           done
+
+  contrib-readme:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    if: github.repository == 'mistic100/ESPHome-IRremoteESP8266' && github.event_name == 'push' && github.ref_name == 'main'
+
+    steps:
+        - name: Update contributors
+          uses: akhilmhdh/contributors-readme-action@v2.3.11
+          env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

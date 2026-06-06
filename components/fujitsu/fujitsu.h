@@ -33,7 +33,10 @@ namespace esphome
 
             // Override the model-based detection of horizontal swing support
             // (enabled by default for `ARRAH2E` and `ARJW2` models)
-            void set_horizontal_swing_supported(bool supported) { this->horizontal_swing_override_ = supported; }
+            void set_horizontal_swing_supported(bool supported)
+            {
+                this->horizontal_swing_override_ = supported;
+            }
 
             void setup() override;
             climate::ClimateTraits traits() override;
@@ -82,8 +85,6 @@ namespace esphome
             bool econo_state_ = false;
             bool powerful_state_ = false;
 
-            // When set, overrides the model-based horizontal swing detection.
-            // Unset (default) preserves the previous model-driven behavior.
             optional<bool> horizontal_swing_override_;
         };
 

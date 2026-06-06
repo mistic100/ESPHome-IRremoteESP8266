@@ -24,6 +24,7 @@ climate:
   - platform: fujitsu
     id: my_fujitsu
     model: ARREB1E
+    horizontal_swing: false
     name: 'Fujitsu'
 
   - platform: panasonic

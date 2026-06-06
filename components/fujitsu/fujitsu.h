@@ -31,12 +31,8 @@ namespace esphome
 
             void set_model(const Model model);
 
-            // Override the model-based detection of horizontal swing support.
-            // Some units share a remote protocol that defaults to horizontal
-            // swing (e.g. ARRAH2E) but physically lack motorized horizontal
-            // vanes; sending a horizontal/both swing command makes those units
-            // reject the frame. Set to false via the `horizontal_swing` YAML
-            // option to hide HORIZONTAL/BOTH from the exposed swing modes.
+            // Override the model-based detection of horizontal swing support
+            // (enabled by default for `ARRAH2E` and `ARJW2` models)
             void set_horizontal_swing_supported(bool supported) { this->horizontal_swing_override_ = supported; }
 
             void setup() override;

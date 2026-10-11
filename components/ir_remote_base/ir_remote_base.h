@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "esphome/components/climate_ir/climate_ir.h"
 
 namespace esphome
@@ -43,18 +45,23 @@ namespace esphome
             virtual void send() = 0;
             virtual void apply_state() = 0;
 
-            void sendGeneric(
+            void send_generic(
                 const uint16_t headermark, const uint32_t headerspace,
                 const uint16_t onemark, const uint32_t onespace,
                 const uint16_t zeromark, const uint32_t zerospace,
                 const uint16_t footermark, const uint32_t gap,
                 const uint8_t *message, const uint16_t nbytes,
-                const uint16_t frequency)
+                const uint16_t frequency,
+                const std::function<void(esphome::remote_base::RemoteTransmitData *)> &data_callback = nullptr
+            )
             {
                 auto transmit = this->transmitter_->transmit();
                 auto *data = transmit.get_data();
 
                 data->set_carrier_frequency(frequency);
+                
+                if (data_callback)
+                    data_callback(data);
 
                 // Header
                 if (headermark)
@@ -67,7 +74,7 @@ namespace esphome
                 // Data
                 for (uint16_t i = 0; i < nbytes; i++)
                 {
-                    sendData(data,
+                    this->send_data(data,
                              onemark, onespace,
                              zeromark, zerospace,
                              *(message + i), 8);
@@ -84,7 +91,7 @@ namespace esphome
                 transmit.perform();
             }
 
-            void sendData(
+            void send_data(
                 esphome::remote_base::RemoteTransmitData *transmit_data,
                 uint16_t onemark, uint32_t onespace,
                 uint16_t zeromark, uint32_t zerospace,

@@ -48,7 +48,7 @@ namespace esphome
         {
             uint8_t *message = this->ac_.getRaw();
 
-            sendGeneric(
+            this->send_generic(
                 kPanasonicHdrMark, kPanasonicHdrSpace,
                 kPanasonicBitMark, kPanasonicOneSpace,
                 kPanasonicBitMark, kPanasonicZeroSpace,
@@ -56,7 +56,7 @@ namespace esphome
                 message, kPanasonicAcSection1Length,
                 kPanasonicFreq
             );
-            sendGeneric(
+            this->send_generic(
                 kPanasonicHdrMark, kPanasonicHdrSpace,
                 kPanasonicBitMark, kPanasonicOneSpace,
                 kPanasonicBitMark, kPanasonicZeroSpace,

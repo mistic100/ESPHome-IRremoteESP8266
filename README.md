@@ -7,12 +7,13 @@ For now only some protocols are implemented, please open an issue or an PR to ad
 It does NOT support receive mode.
 
 **Supported platforms:**
+- [electra](#electra)
 - [fujitsu](#fujitsu)
 - [fujitsu-264](#fujitsu-264)
-- [panasonic](#panasonic)
-- [electra](#electra)
-- [sharp](#sharp)
+- [haier](#haier)
 - [mitsubishi](#mitsubishi)
+- [panasonic](#panasonic)
+- [sharp](#sharp)
 
 ## Usage
 
@@ -50,6 +51,16 @@ These options can be used with any platform :
 
 - `debounce` (Optional, Time): Prevent quick commands to ben sent, effectively batching updates. For example `200ms`.
 - other options of [climate_ir](https://esphome.io/components/climate/climate_ir.html) like `sensor` and `transmitter_id`.
+
+## electra
+
+Also known as Aux.
+
+```yaml
+climate:
+  - platform: electra
+    name: 'Living Room AC'
+```
 
 ## fujitsu
 
@@ -145,30 +156,11 @@ button:
             id(my_climate).set_fan_angle(1);
 ```
 
-## panasonic
+## haier
 
 ```yaml
 climate:
-  - platform: panasonic
-    model: XXXXXX
-    name: 'Living Room AC'
-```
-
-## electra
-
-Also known as Aux.
-
-```yaml
-climate:
-  - platform: electra
-    name: 'Living Room AC'
-```
-
-## sharp
-
-```yaml
-climate:
-  - platform: sharp
+  - platform: haier
     model: XXXXXX
     name: 'Living Room AC'
 ```
@@ -182,8 +174,27 @@ climate:
     name: 'Living Room AC'
 ```
 
+## panasonic
+
+```yaml
+climate:
+  - platform: panasonic
+    model: XXXXXX
+    name: 'Living Room AC'
+```
+
+## sharp
+
+```yaml
+climate:
+  - platform: sharp
+    model: XXXXXX
+    name: 'Living Room AC'
+```
+
 ## Changelog
 
+- **2026.10.XX**: Add Haier platform
 - **2026.07.19**: Add `debounce` option to all platforms
 - **2026.06.06**: Add `horizontal_swing` to Fujitsu platform
 - **2026.05.16**: Add Eco and Powerful presets to Fujitsu platform

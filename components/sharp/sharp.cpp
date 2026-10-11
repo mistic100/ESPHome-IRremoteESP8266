@@ -27,7 +27,7 @@ namespace esphome
         {
             uint8_t *message = this->ac_.getRaw();
 
-            sendGeneric(
+            this->send_generic(
                 kSharpAcHdrMark, kSharpAcHdrSpace,
                 kSharpAcBitMark, kSharpAcOneSpace,
                 kSharpAcBitMark, kSharpAcZeroSpace,

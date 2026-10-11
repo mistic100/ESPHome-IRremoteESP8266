@@ -59,6 +59,30 @@ climate:
     name: 'Mitsubishi 112'
     debounce: 200ms
 
+  - platform: haier
+    id: my_haier_ac
+    model: HAIER_AC
+    name: 'Haier AC'
+    debounce: 200ms
+
+  - platform: haier
+    id: my_haier_ac160
+    model: HAIER_AC160
+    name: 'Haier AC160'
+    debounce: 200ms
+
+  - platform: haier
+    id: my_haier_ac176
+    model: HAIER_AC176
+    name: 'Haier AC176'
+    debounce: 200ms
+
+  - platform: haier
+    id: my_haier_ac_yrw02
+    model: HAIER_AC_YRW02
+    name: 'Haier AC YRW02'
+    debounce: 200ms
+
 button:
   - platform: template
     name: 'Fujitsu Step vertical'

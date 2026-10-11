@@ -111,7 +111,7 @@ namespace esphome
             {
             case Model::MITSUBISHI_AC:
                 message = this->ac_.getRaw();
-                sendGeneric(
+                this->send_generic(
                     kMitsubishiAcHdrMark, kMitsubishiAcHdrSpace,
                     kMitsubishiAcBitMark, kMitsubishiAcOneSpace,
                     kMitsubishiAcBitMark, kMitsubishiAcZeroSpace,
@@ -122,7 +122,7 @@ namespace esphome
                 break;
             case Model::MITSUBISHI136:
                 message = this->ac_136_.getRaw();
-                sendGeneric(
+                this->send_generic(
                     kMitsubishi136HdrMark, kMitsubishi136HdrSpace,
                     kMitsubishi136BitMark, kMitsubishi136OneSpace,
                     kMitsubishi136BitMark, kMitsubishi136ZeroSpace,
@@ -134,7 +134,7 @@ namespace esphome
             case Model::MITSUBISHI112:
             default:
                 message = this->ac_112_.getRaw();
-                sendGeneric(
+                this->send_generic(
                     kMitsubishi112HdrMark, kMitsubishi112HdrSpace,
                     kMitsubishi112BitMark, kMitsubishi112OneSpace,
                     kMitsubishi112BitMark, kMitsubishi112ZeroSpace,

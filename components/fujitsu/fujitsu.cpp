@@ -146,7 +146,7 @@ namespace esphome
             uint8_t *message = this->ac_.getRaw();
             uint8_t length = this->ac_.getStateLength();
 
-            sendGeneric(
+            this->send_generic(
                 kFujitsuAcHdrMark, kFujitsuAcHdrSpace,
                 kFujitsuAcBitMark, kFujitsuAcOneSpace,
                 kFujitsuAcBitMark, kFujitsuAcZeroSpace,
